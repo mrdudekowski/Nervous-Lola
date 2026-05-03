@@ -2,6 +2,9 @@
   "name": "nervouslola-website",
   "version": "1.0.0",
   "description": "Нервная Лола - Уникальная кофейня с характером",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "lint:css": "stylelint \"assets/css/**/*.css\"",
     "lint:css:fix": "stylelint \"assets/css/**/*.css\" --fix",
