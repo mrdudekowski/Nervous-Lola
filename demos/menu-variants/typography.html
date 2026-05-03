@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нервная Лола - Меню (Типографический стиль)</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <style>
+        /* Иконки */
+        .hotchoc-icon, .coffee-icon {
+            width: 96px;
+            height: 96px;
+            margin-left: 0.3rem;
+            opacity: 1;
+            filter: brightness(0) invert(1);
+            vertical-align: middle;
+        }
+        
+        /* Иконка RUM с уменьшенным отступом */
+        .rum-icon {
+            width: 96px;
+            height: 96px;
+            margin-left: 0.1rem;
+            opacity: 1;
+            filter: brightness(0) invert(1);
+            vertical-align: middle;
+        }
+        
+        /* Иконка чайника слева от текста */
+        .teapot-icon {
+            width: 96px;
+            height: 96px;
+            margin-left: 0;
+            margin-right: 0.8rem;
+            opacity: 1;
+            filter: brightness(0) invert(1);
+            vertical-align: middle;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .menu-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 5rem;
+            font-weight: 100;
+            margin-bottom: 3rem;
+            color: #D4AF37;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .menu-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 1px;
+            background: #D4AF37;
+        }
+
+
+        .menu-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .menu-column {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .menu-category {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .menu-category h3 {
+            color: #D4AF37;
+            font-size: 2rem;
+            font-weight: 200;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: left;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0;
+            border-bottom: none;
+            transition: padding-left 0.2s ease;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            padding-left: 0.3rem;
+        }
+
+        .item-name {
+            color: #fff;
+            font-weight: 300;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            flex: 1;
+            position: relative;
+        }
+
+        .item-name::after {
+            content: '';
+            position: absolute;
+            bottom: 0.3em;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #333 0%, transparent 100%);
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .item-price {
+            color: #D4AF37;
+            font-weight: 400;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-left: 1rem;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .category-note {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+        }
+
+        .menu-additions {
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .menu-additions h3 {
+            color: #D4AF37;
+            font-size: 2rem;
+            font-weight: 200;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: left;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+
+
+        .additions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .additions-grid .menu-item {
+            padding: 0.3rem 0;
+        }
+
+        .additions-grid .menu-item:hover {
+            padding-left: 0.2rem;
+        }
+
+        /* Специальные стили для разных категорий */
+        .menu-category[data-category="coffee"] h3 {
+            color: #D4AF37;
+        }
+
+        .menu-category[data-category="tea"] h3 {
+            color: #8B7355;
+        }
+
+        .menu-category[data-category="non-coffee"] h3 {
+            color: #CD853F;
+        }
+
+        .menu-category[data-category="alcohol-aroma"] h3 {
+            color: #B8860B;
+        }
+
+
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-category {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .menu-category:nth-child(1) { animation-delay: 0.1s; }
+        .menu-category:nth-child(2) { animation-delay: 0.2s; }
+        .menu-category:nth-child(3) { animation-delay: 0.3s; }
+        .menu-category:nth-child(4) { animation-delay: 0.4s; }
+        .menu-category:nth-child(5) { animation-delay: 0.5s; }
+
+        @media (max-width: 768px) {
+            .menu-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .additions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-title {
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+            
+            .menu-category h3,
+            .menu-additions h3 {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="menu-container">
+        <h1 class="menu-title">Меню</h1>
+        
+        <div class="menu-content">
+            <!-- Левая колонка -->
+            <div class="menu-column">
+                <div class="menu-category" data-category="coffee">
+                    <h3>Кофе<img src="assets/images/icon/coffee.png" alt="Кофе" class="coffee-icon"></h3>
+                    <div class="menu-item">
+                        <span class="item-name">Капучино</span>
+                        <span class="item-price">200 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Капучино двойной</span>
+                        <span class="item-price">250 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Латте средний</span>
+                        <span class="item-price">220 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Раф</span>
+                        <span class="item-price">280 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Раф арахисовый</span>
+                        <span class="item-price">300 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Раф сырный</span>
+                        <span class="item-price">300 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Флет уайт</span>
+                        <span class="item-price">250 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Эспрессо</span>
+                        <span class="item-price">110 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Эспрессо двойной</span>
+                        <span class="item-price">150 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Американо маленький</span>
+                        <span class="item-price">110 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Американо средний</span>
+                        <span class="item-price">150 р.</span>
+                    </div>
+                </div>
+                
+                <div class="menu-category" data-category="tea">
+                    <h3><img src="assets/images/icon/teapot.png" alt="Чайник" class="teapot-icon">Тизаны чашка/чайник</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Малина/мята</span>
+                        <span class="item-price">190/250 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Облепиховый</span>
+                        <span class="item-price">190/250 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Брусника/клюква</span>
+                        <span class="item-price">190/250 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Имбирный эль</span>
+                        <span class="item-price">190/250 р.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Правая колонка -->
+            <div class="menu-column">
+                <div class="menu-category" data-category="non-coffee">
+                    <h3>Не кофе<img src="assets/images/icon/hotchoc.png" alt="Горячий шоколад" class="hotchoc-icon"></h3>
+                    <div class="menu-item">
+                        <span class="item-name">Какао маленькое</span>
+                        <span class="item-price">180 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Какао среднее</span>
+                        <span class="item-price">220 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Горячий шоколад</span>
+                        <span class="item-price">240 р.</span>
+                    </div>
+                </div>
+                
+                <div class="menu-category" data-category="alcohol-aroma">
+                    <h3>
+                        Напитки с алкогольной ароматикой
+                        <img src="assets/images/icon/RUM.png" alt="Ром" class="rum-icon">
+                    </h3>
+                    <p class="category-note">не содержат алкоголь</p>
+                    <div class="menu-item">
+                        <span class="item-name">Капучино с виски и попкорном</span>
+                        <span class="item-price">300 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Какао с ромом и вишней</span>
+                        <span class="item-price">300 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Раф с вермутом</span>
+                        <span class="item-price">300 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Какао вермут</span>
+                        <span class="item-price">300 р.</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Сливочный грог</span>
+                        <span class="item-price">300 р.</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Дополнения -->
+        <div class="menu-additions">
+            <h3>Ко всем напиткам можно добавить</h3>
+            <div class="additions-grid">
+                <div class="menu-item">
+                    <span class="item-name">Молоко</span>
+                    <span class="item-price">50 р.</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Альтернативное молоко</span>
+                    <span class="item-price">90 р.</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Сироп</span>
+                    <span class="item-price">30 р.</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Маршмеллоу</span>
+                    <span class="item-price">40 р.</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">мёд</span>
+                    <span class="item-price">30 р.</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">мята</span>
+                    <span class="item-price">30 р.</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">лимон</span>
+                    <span class="item-price">20 р.</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">корица</span>
+                    <span class="item-price">бесплатно</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

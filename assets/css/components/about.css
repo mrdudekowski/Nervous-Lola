@@ -1,0 +1,207 @@
+/**
+ * Секция «О нас»: слева текст и видео, справа карусель (от ~768px);
+ * на узком экране — тот же порядок в DOM: текст и видео, затем карусель.
+ */
+.about-section__grid {
+  display: grid;
+  gap: var(--space-block);
+  grid-template-columns: 1fr;
+}
+
+.about-section__carousel-col {
+  min-width: 0;
+}
+
+.about-section__copy-col {
+  min-width: 0;
+}
+
+@media (min-width: 48rem) {
+  .about-section__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    gap: var(--space-section);
+    align-items: stretch;
+  }
+}
+
+.about-section__video {
+  margin-top: var(--space-block);
+}
+
+.about-ambient-video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+}
+
+.about-ambient-video__media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+  outline: 0;
+  pointer-events: none;
+}
+
+/* --- Карусель «О нас»: вьюпорт тянется по высоте колонки (desktop); duo — два 1:1 друг под другом --- */
+.about-section__carousel-col.about-carousel {
+  width: 100%;
+  margin-inline: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+}
+
+@media (min-width: 48rem) {
+  .about-section__carousel-col.about-carousel {
+    min-height: 100%;
+  }
+}
+
+.about-carousel > .atmosphere__dots {
+  flex-shrink: 0;
+  padding-block: var(--space-block) 0;
+}
+
+.about-carousel__viewport {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: min(58vh, 30rem);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: var(--color-bg-elevated);
+}
+
+@media (min-width: 48rem) {
+  .about-carousel__viewport {
+    min-height: 0;
+  }
+}
+
+.about-carousel__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  min-height: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity var(--carousel-fade-duration) var(--carousel-fade-ease);
+  pointer-events: none;
+}
+
+.about-carousel__slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.about-carousel__img--full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  outline: 0;
+}
+
+.about-carousel__duo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0;
+  padding: 0;
+  padding-bottom: 3.5rem;
+  box-sizing: border-box;
+}
+
+.about-carousel__duo--single {
+  grid-template-rows: 1fr;
+  max-width: none;
+  margin-inline: 0;
+  width: 100%;
+}
+
+.about-carousel__cell {
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+  border: 0;
+  outline: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.about-carousel__cell .about-carousel__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  border: 0;
+  outline: 0;
+}
+
+/* Desktop: duo — зазор между кадрами + скругления сверху у верхнего и снизу у нижнего */
+@media (min-width: 48rem) {
+  .about-carousel__duo {
+    gap: 0.5rem;
+    padding-inline: 0.4rem;
+    padding-top: 0.4rem;
+    padding-bottom: calc(3.5rem + 0.4rem);
+  }
+
+  .about-carousel__duo--single {
+    padding-inline: 0.4rem;
+    padding-top: 0.4rem;
+  }
+
+  .about-carousel__cell {
+    background: var(--color-bg-elevated);
+  }
+
+  /* Верхнее фото: скругление снизу к зазору; нижнее — скругление сверху к зазору */
+  .about-carousel__duo:not(.about-carousel__duo--single) .about-carousel__cell:first-child {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .about-carousel__duo:not(.about-carousel__duo--single) .about-carousel__cell:last-child {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  .about-carousel__duo--single .about-carousel__cell {
+    border-radius: var(--radius-md);
+  }
+}
+
+.about-carousel__caption {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  padding: 2.25rem var(--space-gutter) 0.75rem;
+  font-size: var(--font-size-fluid-hero-caption);
+  line-height: var(--line-height-body);
+  color: var(--color-snow);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-ink) 72%, transparent),
+    transparent 65%
+  );
+  z-index: 3;
+  pointer-events: none;
+}

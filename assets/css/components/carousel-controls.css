@@ -1,0 +1,33 @@
+/**
+ * Общие стили prev/next у медиа-каруселей (герой, атмосфера).
+ * Позиционирование кнопок — в atmosphere.css (.atmosphere__controls) и при необходимости в hero.css.
+ */
+.hero__btn,
+.atmosphere__btn {
+  pointer-events: auto;
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  color: var(--color-snow);
+  background: color-mix(in srgb, var(--color-ink) 45%, transparent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: background var(--duration-fast) var(--ease-out-soft);
+}
+
+.hero__btn:hover,
+.atmosphere__btn:hover {
+  background: color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
+
+.hero__btn:focus-visible,
+.atmosphere__btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}

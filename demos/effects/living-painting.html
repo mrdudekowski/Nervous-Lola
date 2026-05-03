@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо #6: Живая картина с интерактивными мазками</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+        }
+
+        /* Холст */
+        .canvas {
+            position: relative;
+            min-height: 80vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+        }
+
+        /* Мазки кисти */
+        .brush-stroke {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .brush-stroke:nth-child(1) {
+            animation: paint-stroke-1 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .brush-stroke:nth-child(2) {
+            animation: paint-stroke-2 2s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes paint-stroke-1 {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg) translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg) translateX(0);
+            }
+        }
+
+        @keyframes paint-stroke-2 {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotate(5deg) translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg) translateX(0);
+            }
+        }
+
+        /* Видео мазок */
+        .video-stroke {
+            aspect-ratio: 9/16;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .video-stroke video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Изображение мазок */
+        .image-stroke {
+            aspect-ratio: 4/5;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .image-stroke img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Эффект мазка кисти */
+        .brush-stroke::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(212, 175, 55, 0.1) 25%, 
+                transparent 50%, 
+                rgba(255, 215, 0, 0.1) 75%, 
+                transparent 100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .brush-stroke:hover::before {
+            opacity: 1;
+            animation: brush-sweep 1s ease-in-out;
+        }
+
+        @keyframes brush-sweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Частицы краски */
+        .paint-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .paint-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: paint-splash 2s ease-out infinite;
+        }
+
+        .paint-particle:nth-child(1) { 
+            top: 20%; left: 30%; 
+            background: #D4AF37; 
+            animation-delay: 0s; 
+        }
+        .paint-particle:nth-child(2) { 
+            top: 60%; left: 70%; 
+            background: #FFD700; 
+            animation-delay: 0.5s; 
+        }
+        .paint-particle:nth-child(3) { 
+            top: 40%; left: 50%; 
+            background: #D4AF37; 
+            animation-delay: 1s; 
+        }
+        .paint-particle:nth-child(4) { 
+            top: 80%; left: 20%; 
+            background: #FFD700; 
+            animation-delay: 1.5s; 
+        }
+
+        @keyframes paint-splash {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) rotate(360deg);
+            }
+        }
+
+        /* Активация частиц при hover */
+        .brush-stroke:hover .paint-particle {
+            animation-duration: 1s;
+        }
+
+        /* Текстура холста */
+        .canvas::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(212, 175, 55, 0.03) 2px,
+                    rgba(212, 175, 55, 0.03) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .canvas {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Атмосфера кафе</h1>
+        <p class="section-subtitle">Почувствуйте уникальную атмосферу "Нервной Лолы"</p>
+        
+        <div class="canvas">
+            <!-- Видео мазок -->
+            <div class="brush-stroke video-stroke">
+                <div class="paint-particles">
+                    <div class="paint-particle"></div>
+                    <div class="paint-particle"></div>
+                    <div class="paint-particle"></div>
+                    <div class="paint-particle"></div>
+                </div>
+                <video 
+                    controls 
+                    muted
+                    preload="metadata"
+                    poster="assets/images/video-poster.jpg">
+                    <source src="../WhatsApp_Video_2024-12-13_at_03.34.20.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Изображение мазок -->
+            <div class="brush-stroke image-stroke">
+                <div class="paint-particles">
+                    <div class="paint-particle"></div>
+                    <div class="paint-particle"></div>
+                    <div class="paint-particle"></div>
+                    <div class="paint-particle"></div>
+                </div>
+                <img 
+                    src="../9e32ed17-d72a-4124-8025-852e4cfd45cb.png" 
+                    alt="Уникальная атмосфера кафе Нервная Лола">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

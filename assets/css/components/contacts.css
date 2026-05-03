@@ -1,0 +1,114 @@
+.contacts__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contact-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-md);
+  border: var(--border-subtle);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-fluid-sm);
+  transition:
+    color var(--duration-fast) var(--ease-out-soft),
+    border-color var(--duration-fast) var(--ease-out-soft);
+}
+
+.contact-action svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: currentcolor;
+}
+
+.contact-action--tg:hover,
+.contact-action--tg:focus-visible {
+  color: var(--color-contact-tg-hover);
+  border-color: color-mix(in srgb, var(--color-contact-tg-hover) 55%, transparent);
+}
+
+.contact-action--wa:hover,
+.contact-action--wa:focus-visible {
+  color: var(--color-contact-wa-hover);
+  border-color: color-mix(in srgb, var(--color-contact-wa-hover) 55%, transparent);
+}
+
+.contact-action--phone:hover,
+.contact-action--phone:focus-visible {
+  color: var(--color-contact-phone-hover);
+  border-color: color-mix(in srgb, var(--color-contact-phone-hover) 55%, transparent);
+}
+
+.contact-action--disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.contact-action--disabled:hover {
+  color: var(--color-text);
+  border-color: color-mix(in srgb, var(--color-text) 18%, transparent);
+}
+
+.contacts__actions--icon-only {
+  gap: 0.5rem;
+}
+
+.contacts__actions--icon-only .contact-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border: none;
+  background: transparent;
+  gap: 0;
+  transition:
+    color var(--duration-fast) var(--ease-out-soft),
+    transform var(--duration-fast) var(--ease-out-soft),
+    filter var(--duration-fast) var(--ease-out-soft);
+}
+
+.contacts__actions--icon-only .contact-action svg {
+  width: clamp(1.35rem, 1rem + 1.2vw, 1.65rem);
+  height: clamp(1.35rem, 1rem + 1.2vw, 1.65rem);
+}
+
+.contacts__actions--icon-only .contact-action:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.contacts__actions--icon-only .contact-action--tg:hover,
+.contacts__actions--icon-only .contact-action--tg:focus-visible {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 4px 10px color-mix(in srgb, var(--color-contact-tg-hover) 35%, transparent));
+  border-color: transparent;
+}
+
+.contacts__actions--icon-only .contact-action--wa:hover,
+.contacts__actions--icon-only .contact-action--wa:focus-visible {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 4px 10px color-mix(in srgb, var(--color-contact-wa-hover) 35%, transparent));
+  border-color: transparent;
+}
+
+.contacts__actions--icon-only .contact-action--phone:hover,
+.contacts__actions--icon-only .contact-action--phone:focus-visible {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 4px 10px color-mix(in srgb, var(--color-contact-phone-hover) 35%, transparent));
+  border-color: transparent;
+}
+
+.contacts__actions--icon-only .contact-action--disabled:hover {
+  transform: none;
+  filter: none;
+}

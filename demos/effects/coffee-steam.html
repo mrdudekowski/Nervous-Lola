@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо #3: Горячий пар от кофе с частицами</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+        }
+
+        /* Контейнер с паром */
+        .steam-container {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        /* Элементы с паром */
+        .steam-element {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .steam-element:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Видео элемент */
+        .video-steam {
+            aspect-ratio: 9/16;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .video-steam video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Изображение элемент */
+        .image-steam {
+            aspect-ratio: 4/5;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .image-steam img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Анимация пара */
+        .steam {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 200px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .steam-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: steam-rise 4s ease-in-out infinite;
+        }
+
+        .steam-particle:nth-child(1) { 
+            left: 20%; 
+            animation-delay: 0s; 
+            animation-duration: 3s;
+        }
+        .steam-particle:nth-child(2) { 
+            left: 40%; 
+            animation-delay: 0.5s; 
+            animation-duration: 3.5s;
+        }
+        .steam-particle:nth-child(3) { 
+            left: 60%; 
+            animation-delay: 1s; 
+            animation-duration: 4s;
+        }
+        .steam-particle:nth-child(4) { 
+            left: 80%; 
+            animation-delay: 1.5s; 
+            animation-duration: 3.2s;
+        }
+        .steam-particle:nth-child(5) { 
+            left: 30%; 
+            animation-delay: 2s; 
+            animation-duration: 3.8s;
+        }
+        .steam-particle:nth-child(6) { 
+            left: 70%; 
+            animation-delay: 2.5s; 
+            animation-duration: 3.3s;
+        }
+
+        @keyframes steam-rise {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+            }
+            80% {
+                opacity: 0.8;
+                transform: translateY(-150px) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) scale(0.8);
+            }
+        }
+
+        /* Усиление пара при hover */
+        .steam-element:hover .steam-particle {
+            animation-duration: 2s;
+            background: radial-gradient(circle, rgba(212, 175, 55, 1) 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+        }
+
+        /* Золотые искры */
+        .spark {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #D4AF37;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .spark:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .spark:nth-child(2) { top: 30%; left: 85%; animation-delay: 0.7s; }
+        .spark:nth-child(3) { top: 60%; left: 25%; animation-delay: 1.4s; }
+        .spark:nth-child(4) { top: 80%; left: 75%; animation-delay: 2.1s; }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .steam-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .steam {
+                width: 80px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Атмосфера кафе</h1>
+        <p class="section-subtitle">Почувствуйте уникальную атмосферу "Нервной Лолы"</p>
+        
+        <div class="steam-container">
+            <!-- Видео с паром -->
+            <div class="steam-element video-steam">
+                <div class="steam">
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                </div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <video 
+                    controls 
+                    muted
+                    preload="metadata"
+                    poster="assets/images/video-poster.jpg">
+                    <source src="../WhatsApp_Video_2024-12-13_at_03.34.20.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Изображение с паром -->
+            <div class="steam-element image-steam">
+                <div class="steam">
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                    <div class="steam-particle"></div>
+                </div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <img 
+                    src="../9e32ed17-d72a-4124-8025-852e4cfd45cb.png" 
+                    alt="Уникальная атмосфера кафе Нервная Лола">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо-галерея: 10 концепций для блока "Атмосфера кафе"</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .description {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            border-color: #D4AF37;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .demo-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+        }
+
+        .demo-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .demo-description {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .demo-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .demo-features li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            color: #D4AF37;
+        }
+
+        .demo-features li:last-child {
+            border-bottom: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 1rem 2rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #D4AF37;
+            border-radius: 10px;
+            color: #D4AF37;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .recommendation {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid #D4AF37;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .recommendation h3 {
+            color: #D4AF37;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .recommendation p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">Демо-галерея концепций</h1>
+            <p class="subtitle">10 идей для блока "Атмосфера кафе" на миллион долларов</p>
+            <p class="description">
+                Каждая концепция представляет уникальный подход к визуализации контента. 
+                Нажмите на карточку, чтобы увидеть интерактивную демонстрацию.
+            </p>
+        </div>
+
+        <div class="recommendation">
+            <h3>🌟 Рекомендация</h3>
+            <p>
+                <strong>Концепции #1 + #3:</strong> "Парящие карточки" + "Горячий пар от кофе" 
+                создадут уникальную атмосферу с магнитным hover и кофейными частицами.
+            </p>
+        </div>
+
+        <div class="demo-grid">
+            <a href="demo-1-magnetic-cards.html" class="demo-card">
+                <div class="demo-number">01</div>
+                <h3 class="demo-title">Парящие карточки с магнитным эффектом</h3>
+                <p class="demo-description">Элементы "парят" на разной высоте и притягиваются к курсору</p>
+                <ul class="demo-features">
+                    <li>Магнитный hover эффект</li>
+                    <li>Плавное движение к курсору</li>
+                    <li>Легкое вращение элементов</li>
+                    <li>Золотые частицы</li>
+                </ul>
+            </a>
+
+            <a href="demo-2-theater-curtains.html" class="demo-card">
+                <div class="demo-number">02</div>
+                <h3 class="demo-title">Театральные кулисы с раскрывающимся сюжетом</h3>
+                <p class="demo-description">Элементы появляются как театральные кулисы с драматичным раскрытием</p>
+                <ul class="demo-features">
+                    <li>Поочередное появление слева и справа</li>
+                    <li>Текстовые блоки "выплывают" из-за элементов</li>
+                    <li>Театральные огни</li>
+                    <li>3D эффекты</li>
+                </ul>
+            </a>
+
+            <a href="demo-3-coffee-steam.html" class="demo-card">
+                <div class="demo-number">03</div>
+                <h3 class="demo-title">Горячий пар от кофе с частицами</h3>
+                <p class="demo-description">CSS анимация пара с золотым свечением, поднимающегося от элементов</p>
+                <ul class="demo-features">
+                    <li>Анимация пара с частицами</li>
+                    <li>Золотые искры</li>
+                    <li>Реакция на hover</li>
+                    <li>Атмосфера настоящей кофейни</li>
+                </ul>
+            </a>
+
+            <a href="demo-4-circus-showman.html" class="demo-card">
+                <div class="demo-number">04</div>
+                <h3 class="demo-title">Цирковой шоумен с акробатическими переходами</h3>
+                <p class="demo-description">Элементы "кувыркаются" и меняются местами с 3D флипами</p>
+                <ul class="demo-features">
+                    <li>3D флипы и сальто</li>
+                    <li>Золотые искры</li>
+                    <li>Конфетти</li>
+                    <li>Запоминающееся шоу</li>
+                </ul>
+            </a>
+
+            <a href="demo-5-star-constellation.html" class="demo-card">
+                <div class="demo-number">05</div>
+                <h3 class="demo-title">Звездное небо с созвездиями</h3>
+                <p class="demo-description">Фон - звездное небо, элементы - созвездия с соединительными линиями</p>
+                <ul class="demo-features">
+                    <li>Мерцающие звезды</li>
+                    <li>Соединительные линии при hover</li>
+                    <li>Анимированные созвездия</li>
+                    <li>Магическая атмосфера</li>
+                </ul>
+            </a>
+
+            <a href="demo-6-living-painting.html" class="demo-card">
+                <div class="demo-number">06</div>
+                <h3 class="demo-title">Живая картина с интерактивными мазками</h3>
+                <p class="demo-description">Элементы появляются как мазки кисти с анимацией рисования</p>
+                <ul class="demo-features">
+                    <li>Рисование в реальном времени</li>
+                    <li>Разные кисти и текстуры</li>
+                    <li>Частицы краски</li>
+                    <li>Художественное произведение</li>
+                </ul>
+            </a>
+
+            <a href="demo-7-cinema-theater.html" class="demo-card">
+                <div class="demo-number">07</div>
+                <h3 class="demo-title">Кинотеатр с проектором и экраном</h3>
+                <p class="demo-description">Видео проецируется на "экран", изображение - "афиша"</p>
+                <ul class="demo-features">
+                    <li>Луч проектора</li>
+                    <li>Пылинки в воздухе</li>
+                    <li>Анимированная афиша</li>
+                    <li>Кинематографическая атмосфера</li>
+                </ul>
+            </a>
+
+            <a href="demo-8-inspiration-waves.html" class="demo-card">
+                <div class="demo-number">08</div>
+                <h3 class="demo-title">Волны вдохновения с резонансом</h3>
+                <p class="demo-description">Элементы создают волны при взаимодействии с интерференцией</p>
+                <ul class="demo-features">
+                    <li>Волны распространяются от hover</li>
+                    <li>Интерференция волн</li>
+                    <li>Звуковые волны</li>
+                    <li>Гармоничное взаимодействие</li>
+                </ul>
+            </a>
+
+            <a href="demo-9-carnival-parade.html" class="demo-card">
+                <div class="demo-number">09</div>
+                <h3 class="demo-title">Карнавал с парадом анимаций</h3>
+                <p class="demo-description">Каждый элемент - участник карнавала с шествием анимаций</p>
+                <ul class="demo-features">
+                    <li>Шествие анимаций</li>
+                    <li>Конфетти</li>
+                    <li>Разные костюмы (стили)</li>
+                    <li>Праздничное настроение</li>
+                </ul>
+            </a>
+
+            <a href="demo-10-quantum-effects.html" class="demo-card">
+                <div class="demo-number">10</div>
+                <h3 class="demo-title">Темная материя с квантовыми эффектами</h3>
+                <p class="demo-description">Элементы существуют в квантовом состоянии с суперпозицией</p>
+                <ul class="demo-features">
+                    <li>Суперпозиция + коллапс волновой функции</li>
+                    <li>Частицы + энергетические поля</li>
+                    <li>Квантовые туннели</li>
+                    <li>Футуристическая магия</li>
+                </ul>
+            </a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← Вернуться к основному сайту</a>
+        </div>
+    </div>
+</body>
+</html>

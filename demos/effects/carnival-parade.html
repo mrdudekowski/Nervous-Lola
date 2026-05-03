@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо #9: Карнавал с парадом анимаций</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+        }
+
+        /* Карнавальная улица */
+        .carnival-street {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                linear-gradient(45deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                linear-gradient(-45deg, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+        }
+
+        /* Участники парада */
+        .parade-participant {
+            position: absolute;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .parade-participant:nth-child(1) {
+            left: 10%;
+            top: 30%;
+            animation: parade-march-1 4s ease-in-out infinite;
+        }
+
+        .parade-participant:nth-child(2) {
+            right: 10%;
+            top: 30%;
+            animation: parade-march-2 4s ease-in-out infinite;
+        }
+
+        @keyframes parade-march-1 {
+            0%, 100% { 
+                transform: translateY(0) rotate(-2deg); 
+            }
+            25% { 
+                transform: translateY(-10px) rotate(2deg); 
+            }
+            50% { 
+                transform: translateY(0) rotate(-2deg); 
+            }
+            75% { 
+                transform: translateY(10px) rotate(2deg); 
+            }
+        }
+
+        @keyframes parade-march-2 {
+            0%, 100% { 
+                transform: translateY(0) rotate(2deg); 
+            }
+            25% { 
+                transform: translateY(10px) rotate(-2deg); 
+            }
+            50% { 
+                transform: translateY(0) rotate(2deg); 
+            }
+            75% { 
+                transform: translateY(-10px) rotate(-2deg); 
+            }
+        }
+
+        /* Костюмы участников */
+        .participant-costume {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .participant-costume:hover {
+            transform: scale(1.1);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Видео костюм */
+        .video-costume {
+            aspect-ratio: 9/16;
+            width: 300px;
+            height: 400px;
+        }
+
+        .video-costume video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Изображение костюм */
+        .image-costume {
+            aspect-ratio: 4/5;
+            width: 300px;
+            height: 375px;
+        }
+
+        .image-costume img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Декорации костюмов */
+        .costume-decoration {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: #D4AF37;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+            animation: decoration-bounce 2s ease-in-out infinite;
+        }
+
+        .participant-costume:hover .costume-decoration {
+            opacity: 1;
+        }
+
+        @keyframes decoration-bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Конфетти */
+        .confetti-shower {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            opacity: 0;
+            animation: confetti-fall 3s ease-in-out infinite;
+        }
+
+        .confetti-piece:nth-child(1) { 
+            left: 10%; 
+            background: #D4AF37; 
+            animation-delay: 0s; 
+        }
+        .confetti-piece:nth-child(2) { 
+            left: 20%; 
+            background: #FFD700; 
+            animation-delay: 0.3s; 
+        }
+        .confetti-piece:nth-child(3) { 
+            left: 30%; 
+            background: #D4AF37; 
+            animation-delay: 0.6s; 
+        }
+        .confetti-piece:nth-child(4) { 
+            left: 40%; 
+            background: #FFD700; 
+            animation-delay: 0.9s; 
+        }
+        .confetti-piece:nth-child(5) { 
+            left: 50%; 
+            background: #D4AF37; 
+            animation-delay: 1.2s; 
+        }
+        .confetti-piece:nth-child(6) { 
+            left: 60%; 
+            background: #FFD700; 
+            animation-delay: 1.5s; 
+        }
+        .confetti-piece:nth-child(7) { 
+            left: 70%; 
+            background: #D4AF37; 
+            animation-delay: 1.8s; 
+        }
+        .confetti-piece:nth-child(8) { 
+            left: 80%; 
+            background: #FFD700; 
+            animation-delay: 2.1s; 
+        }
+        .confetti-piece:nth-child(9) { 
+            left: 90%; 
+            background: #D4AF37; 
+            animation-delay: 2.4s; 
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Активация конфетти при hover */
+        .parade-participant:hover ~ .confetti-shower .confetti-piece,
+        .parade-participant:hover + .confetti-shower .confetti-piece {
+            animation-duration: 2s;
+        }
+
+        /* Музыкальные ноты */
+        .music-notes {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .carnival-street:hover .music-notes {
+            opacity: 1;
+        }
+
+        .note {
+            position: absolute;
+            color: #D4AF37;
+            font-size: 2rem;
+            animation: note-float 3s ease-in-out infinite;
+        }
+
+        .note:nth-child(1) { left: -50px; animation-delay: 0s; }
+        .note:nth-child(2) { left: 0; animation-delay: 0.5s; }
+        .note:nth-child(3) { left: 50px; animation-delay: 1s; }
+
+        @keyframes note-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .parade-participant {
+                position: relative;
+                left: auto !important;
+                right: auto !important;
+                top: auto !important;
+                margin: 1rem auto;
+            }
+            
+            .carnival-street {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Атмосфера кафе</h1>
+        <p class="section-subtitle">Почувствуйте уникальную атмосферу "Нервной Лолы"</p>
+        
+        <div class="carnival-street">
+            <!-- Видео участник парада -->
+            <div class="parade-participant">
+                <div class="participant-costume video-costume">
+                    <div class="costume-decoration"></div>
+                    <video 
+                        controls 
+                        muted
+                        preload="metadata"
+                        poster="assets/images/video-poster.jpg">
+                        <source src="../WhatsApp_Video_2024-12-13_at_03.34.20.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            
+            <!-- Изображение участник парада -->
+            <div class="parade-participant">
+                <div class="participant-costume image-costume">
+                    <div class="costume-decoration"></div>
+                    <img 
+                        src="../9e32ed17-d72a-4124-8025-852e4cfd45cb.png" 
+                        alt="Уникальная атмосфера кафе Нервная Лола">
+                </div>
+            </div>
+            
+            <!-- Конфетти -->
+            <div class="confetti-shower">
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+            </div>
+            
+            <!-- Музыкальные ноты -->
+            <div class="music-notes">
+                <div class="note">♪</div>
+                <div class="note">♫</div>
+                <div class="note">♪</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "meta": {
+    "currency": "RUB",
+    "priceSuffixOnPrint": "none",
+    "sources": [
+      {
+        "asset": "assets/images/menu/1.webp",
+        "role": "board_pink"
+      },
+      {
+        "asset": "assets/images/menu/2.webp",
+        "role": "board_green"
+      }
+    ],
+    "openQuestions": [
+      "[требует подтверждения] Названия «ходзитя капучино/флэт»: на фото стилизованный шрифт; возможно имелось в виду «ходжича» (ходзитя).",
+      "[требует подтверждения] В подписи к завтракам указано «кухня работает до 20:20» — необычное время; проверить по актуальному меню в зале.",
+      "Символа валюты на фото нет — на сайте добавлен знак ₽ для читаемости (не с печатного оригинала)."
+    ]
+  },
+  "section": {
+    "heading": "Меню",
+    "calloutRu": "Мы делаем любые напитки по вашим вкусовым предпочтениям!"
+  },
+  "categories": [
+    {
+      "id": "classics",
+      "title": "Классика",
+      "backgroundImage": "classics.webp",
+      "sourcePhoto": "assets/images/menu/1.webp",
+      "iconFile": "coffee.svg",
+      "items": [
+        { "name": "Эспрессо", "priceRub": 200 },
+        { "name": "Американо", "priceRub": [200, 240] },
+        { "name": "Флэт уайт", "priceRub": 290 },
+        { "name": "Капучино", "priceRub": [240, 290] },
+        { "name": "Латте", "priceRub": 280 },
+        { "name": "Раф", "priceRub": 320 },
+        { "name": "Бамбл", "priceRub": 350 },
+        { "name": "Бамбл на фреше", "priceRub": 450 },
+        { "name": "Эспрессо тоник", "priceRub": 320 }
+      ]
+    },
+    {
+      "id": "addons",
+      "title": "Добавки",
+      "backgroundImage": "addons.webp",
+      "sourcePhoto": "assets/images/menu/1.webp",
+      "iconFile": "syrup.svg",
+      "items": [
+        { "name": "Сироп", "priceRub": 50 },
+        { "name": "Коровье безлактозное молоко", "priceRub": 70 },
+        { "name": "Альтернативное молоко", "priceRub": 100 },
+        { "name": "Безалкогольный алкоголь", "priceRub": 100 },
+        { "name": "Сделать на декафе", "priceRub": 70 }
+      ]
+    },
+    {
+      "id": "alternative",
+      "title": "Альтернатива",
+      "subtitle": "Интересно и вкусно",
+      "layout": "two-col-left",
+      "asideLogoFile": "lolalogo2inverted.svg",
+      "backgroundImage": "alternative.webp",
+      "sourcePhoto": "assets/images/menu/1.webp",
+      "iconFile": "tea-cup.svg",
+      "items": [
+        { "name": "V60", "priceRub": 350 },
+        { "name": "Фильтр", "priceRub": [240, 270] }
+      ]
+    },
+    {
+      "id": "alternative_classics",
+      "title": "Альтернативная классика",
+      "backgroundImage": "alternative_classics.webp",
+      "sourcePhoto": "assets/images/menu/1.webp",
+      "iconFile": "teapot.svg",
+      "items": [
+        { "name": "Маття капучино", "priceRub": 320 },
+        { "name": "Маття флэт", "priceRub": 300 },
+        { "name": "Маття тоник", "priceRub": 350 },
+        {
+          "name": "Ходзитя капучино",
+          "priceRub": 350,
+          "tags": ["needs_human_confirmation"],
+          "noteRu": "[требует подтверждения] чтение со стилизованного шрифта на фото; возможно «ходжича капучино»."
+        },
+        {
+          "name": "Ходзитя флэт",
+          "priceRub": 320,
+          "tags": ["needs_human_confirmation"],
+          "noteRu": "[требует подтверждения] см. соседнюю позицию «ходзитя капучино»."
+        }
+      ]
+    },
+    {
+      "id": "warming_more",
+      "title": "И ещё согревающее",
+      "backgroundImage": "warming_more.webp",
+      "sourcePhoto": "assets/images/menu/1.webp",
+      "iconFile": "teapot.png",
+      "items": [
+        { "name": "Какао", "priceRub": [270, 320] },
+        { "name": "Тизан малина и мята", "priceRub": [280, 380] },
+        { "name": "Тизан облепиха и бадьян", "priceRub": [280, 380] },
+        { "name": "Тизан брусника, клюква и корица", "priceRub": [280, 380] }
+      ]
+    },
+    {
+      "id": "snacks",
+      "title": "Закуски",
+      "backgroundImage": "snacks.webp",
+      "sourcePhoto": "assets/images/menu/1.webp",
+      "iconFile": "peanuts.svg",
+      "items": [
+        { "name": "Мёд и микс орешков", "priceRub": 180 },
+        { "name": "Голубика и микс орешков", "priceRub": 220 },
+        { "name": "Мёд и вяленая клюква", "priceRub": 180 },
+        { "name": "Вяленая клюква и микс орешков", "priceRub": 180 }
+      ]
+    },
+    {
+      "id": "breakfast",
+      "title": "Позавтракать",
+      "categoryNoteRu": "На фото вертикальная пометка: кухня работает до 20:20 [требует подтверждения].",
+      "backgroundImage": "breakfast.webp",
+      "sourcePhoto": "assets/images/menu/1.webp",
+      "iconFile": "kasha.svg",
+      "items": [
+        {
+          "name": "Томатная овсянка",
+          "description": "На воде, с беконом, пармезаном и пашот",
+          "priceRub": 400
+        },
+        {
+          "name": "Овсянка с рыбкой",
+          "description": "На воде, с нори, пармезаном и пашот",
+          "priceRub": 450
+        },
+        {
+          "name": "Овсянка с бананом",
+          "description": "Вяленой клюквой, орехами, тыквенными семенами и мёдом",
+          "priceRub": 400
+        },
+        {
+          "name": "Яркая овсянка",
+          "description": "С малиной, малиновым пюре, семенами чиа и голубикой или манго на выбор",
+          "priceRub": 420
+        },
+        {
+          "name": "Сырники с бананом",
+          "description": "Орехами и мёдом",
+          "priceRub": 420
+        },
+        {
+          "name": "Сырники с шоколадом",
+          "description": "Украшаем вяленой клюквой, пармезаном и мёдом",
+          "priceRub": 460
+        },
+        {
+          "name": "Яркие сырники",
+          "description": "С малиновым пюре и голубикой или манго на выбор",
+          "priceRub": 450
+        },
+        {
+          "name": "Вафля с беконом",
+          "description": "И пашот на подушке из сыра и шпината, ваша любимая",
+          "priceRub": 450
+        },
+        {
+          "name": "Вафля с рыбкой",
+          "description": "Авокадо и пашот на подушке из сыра и шпината, ваша любимая",
+          "priceRub": 520
+        },
+        {
+          "name": "Вафля с мороженым",
+          "description": "И топпингом на выбор",
+          "priceRub": 380
+        },
+        {
+          "name": "Яркая вафля",
+          "description": "С мороженым, малиновым пюре и голубикой или манго на выбор",
+          "priceRub": 450
+        }
+      ]
+    },
+    {
+      "id": "unique_offer",
+      "title": "Наше уникальное предложение",
+      "subtitle": "Можем сделать напиток по вашим вкусовым предпочтениям",
+      "backgroundImage": "unique_offer.webp",
+      "sourcePhoto": "assets/images/menu/2.webp",
+      "omitLeadingIcon": true,
+      "items": [],
+      "subsections": [
+        {
+          "title": "Согревающие напитки с алкогольной тематикой",
+          "iconFile": "RUM.svg",
+          "noteRu": "Рекомендуем попробовать (не содержит алкоголь).",
+          "items": [
+            { "name": "Капучино с ромом и грушей", "priceRub": 380 },
+            { "name": "Капучино с виски и миндалём", "priceRub": 380 },
+            { "name": "Раф с джином и лавандой", "priceRub": 380 },
+            { "name": "Раф с вермутом и ванилью", "priceRub": 380 },
+            { "name": "Сливочный грог", "priceRub": 380 },
+            { "name": "Американо с водкой, ягодами и апельсином", "priceRub": 380 },
+            { "name": "Какао с ромом и вишней", "priceRub": 380 },
+            { "name": "Чай с джином, клюквой и кокосом", "priceRub": 380 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "na_cocktails",
+      "title": "Безалкогольные коктейли",
+      "backgroundImage": "cocktails.webp",
+      "sourcePhoto": "assets/images/menu/2.webp",
+      "iconFile": "coctail.svg",
+      "items": [
+        { "name": "Мохито", "priceRub": 350 },
+        { "name": "Пина колада", "priceRub": 350 },
+        { "name": "Апероль", "priceRub": 350 },
+        { "name": "Негрони", "priceRub": 350 },
+        { "name": "Кровавая мэри", "priceRub": 350 },
+        { "name": "Джин тоник с лемонграссом и лаймом", "priceRub": 350 },
+        { "name": "Бамбл с джином и тропическими растениями", "priceRub": 350 }
+      ]
+    }
+  ],
+  "supplementaryCopyRu": {
+    "printMenuForeword": "На втором фото меню — вводный текст о «Лоле» и миссии кофейни (оформление зелёной стороны). Для краткости лендинга не включён в карточки позиций; при необходимости вынесите в отдельный блок «О нас»."
+  }
+}

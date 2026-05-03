@@ -1,0 +1,98 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: var(--color-bg-deep);
+}
+
+.slides {
+  position: relative;
+  width: 100%;
+
+  /* Абсолютные .slide не задают высоту родителю; без явной высоты img с height:100% может выйти в натуральный размер. */
+  height: clamp(260px, 42vmin, 720px);
+  min-height: 280px;
+  max-height: 85vh;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity var(--carousel-fade-duration) var(--carousel-fade-ease);
+  z-index: 1;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+}
+
+.hero-controls {
+  position: absolute;
+  z-index: 4;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.hero-arrow {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-snow) 35%, transparent);
+  background: color-mix(in srgb, var(--color-ink) 45%, transparent);
+  color: var(--color-snow);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.hero-arrow:focus-visible {
+  outline: 2px solid var(--color-gold-mid);
+  outline-offset: 2px;
+}
+
+.hero-click-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 28%;
+  cursor: pointer;
+}
+
+.hero-click-prev {
+  left: 0;
+}
+
+.hero-click-next {
+  right: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,138 @@
+/* 2×2: верх — текст слева, CTA справа; низ — карта на всю ширину */
+.map-section__grid {
+  display: grid;
+  gap: clamp(1rem, 3vw, 1.75rem);
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'copy'
+    'cta'
+    'map';
+}
+
+.map-section__copy {
+  grid-area: copy;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-block);
+  min-width: 0;
+}
+
+.map-section__copy .map-address {
+  margin: 0;
+}
+
+.map-section__cta {
+  grid-area: cta;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Колонка иконок: без растягивания на всю ширину — кластер «привязан» к сетке */
+.map-section__cta .contacts__actions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: clamp(0.45rem, 2vw, 0.85rem);
+  width: auto;
+  max-width: 100%;
+}
+
+.map-section__contacts {
+  margin-block-end: 0;
+  width: auto;
+  max-width: 100%;
+}
+
+/* Планшет / одна колонка: кластер по центру между текстом и картой */
+@media (min-width: 36rem) and (max-width: 55.98rem) {
+  .map-section__cta {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .map-section__cta .contacts__actions {
+    align-items: center;
+  }
+}
+
+@media (min-width: 56rem) {
+  .map-section__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'copy cta'
+      'map map';
+  }
+
+  .map-section__cta {
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  .map-section__cta .contacts__actions {
+    align-items: flex-end;
+    gap: clamp(0.55rem, 1vw, 0.9rem);
+  }
+}
+
+/* Крупные экраны: чуть больше воздуха между иконками */
+@media (min-width: 75rem) {
+  .map-section__cta .contacts__actions {
+    gap: clamp(0.65rem, 1vw, 1rem);
+  }
+}
+
+/* Ландшафт с малым по высоте окном: ряд TG → WA → звонок, меньше «лестницы» по вертикали */
+@media (max-height: 32rem) and (orientation: landscape) and (max-width: 55.98rem) {
+  .map-section__cta {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .map-section__cta .contacts__actions {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.5rem, 3vw, 1.35rem);
+  }
+}
+
+.map-section__map {
+  grid-area: map;
+}
+
+.map-root {
+  min-height: var(--map-canvas-height);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: var(--border-subtle);
+  background: var(--color-bg-elevated);
+}
+
+.map-root #yandex-map-canvas {
+  width: 100%;
+  height: var(--map-canvas-height);
+}
+
+.map-root__fallback {
+  padding: var(--space-gutter);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-fluid-sm);
+}
+
+.map-address {
+  margin: 0 0 var(--space-block);
+  font-size: var(--font-size-fluid-base);
+  font-weight: 600;
+}
+
+.map-note {
+  margin: 0;
+  font-size: var(--font-size-fluid-sm);
+  color: var(--color-text-muted);
+  max-width: 60ch;
+}

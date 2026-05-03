@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Варианты секции дополнений к напиткам</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF7A00, #E56F00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .variant {
+            margin-bottom: 80px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .variant-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #FF7A00;
+            text-align: center;
+        }
+
+        /* Вариант 1: Минималистичный с акцентом */
+        .variant-1 {
+            background: linear-gradient(135deg, rgba(255, 122, 0, 0.1) 0%, rgba(229, 111, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 122, 0, 0.3);
+        }
+
+        .variant-1 .addons-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #FF7A00;
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .variant-1 .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .variant-1 .addon-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            border-left: 3px solid #FF7A00;
+            transition: all 0.3s ease;
+        }
+
+        .variant-1 .addon-item:hover {
+            background: rgba(255, 122, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .variant-1 .addon-name {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .variant-1 .addon-price {
+            color: #FF7A00;
+            font-weight: 600;
+        }
+
+        /* Вариант 2: Карточки с тенями */
+        .variant-2 {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(255, 122, 0, 0.2);
+        }
+
+        .variant-2 .addons-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .variant-2 .addons-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #FF7A00, #E56F00);
+        }
+
+        .variant-2 .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .variant-2 .addon-item {
+            background: linear-gradient(135deg, rgba(255, 122, 0, 0.1) 0%, rgba(229, 111, 0, 0.05) 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 122, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 122, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .variant-2 .addon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 122, 0, 0.2);
+        }
+
+        .variant-2 .addon-name {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .variant-2 .addon-price {
+            color: #FF7A00;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Вариант 3: Список с разделителями */
+        .variant-3 {
+            background: rgba(45, 45, 45, 0.6);
+            border: 1px solid rgba(255, 122, 0, 0.15);
+        }
+
+        .variant-3 .addons-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #FF7A00;
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 122, 0, 0.3);
+        }
+
+        .variant-3 .addons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .variant-3 .addon-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 122, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .variant-3 .addon-item:last-child {
+            border-bottom: none;
+        }
+
+        .variant-3 .addon-item:hover {
+            background: rgba(255, 122, 0, 0.05);
+            padding-left: 15px;
+            padding-right: 15px;
+            border-radius: 8px;
+        }
+
+        .variant-3 .addon-name {
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .variant-3 .addon-price {
+            color: #FF7A00;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Вариант 4: Таблица с градиентами */
+        .variant-4 {
+            background: linear-gradient(135deg, rgba(255, 122, 0, 0.08) 0%, rgba(229, 111, 0, 0.03) 100%);
+            border: 1px solid rgba(255, 122, 0, 0.25);
+        }
+
+        .variant-4 .addons-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #FF7A00, #E56F00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .variant-4 .addons-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .variant-4 .addon-item {
+            border-bottom: 1px solid rgba(255, 122, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .variant-4 .addon-item:hover {
+            background: rgba(255, 122, 0, 0.1);
+        }
+
+        .variant-4 .addon-name {
+            color: #ffffff;
+            font-weight: 500;
+            padding: 15px 20px;
+            text-align: left;
+        }
+
+        .variant-4 .addon-price {
+            color: #FF7A00;
+            font-weight: 600;
+            padding: 15px 20px;
+            text-align: right;
+        }
+
+        /* Вариант 5: Модульная сетка */
+        .variant-5 {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(255, 122, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .variant-5::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FF7A00, #E56F00, #FF7A00);
+            opacity: 0.7;
+        }
+
+        .variant-5 .addons-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #FF7A00;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .variant-5 .addons-title::before,
+        .variant-5 .addons-title::after {
+            content: '•';
+            color: rgba(255, 122, 0, 0.8);
+            margin: 0 10px;
+            font-size: 0.8em;
+        }
+
+        .variant-5 .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .variant-5 .addon-item {
+            background: rgba(255, 122, 0, 0.08);
+            border: 1px solid rgba(255, 122, 0, 0.25);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .variant-5 .addon-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #FF7A00, transparent);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .variant-5 .addon-item:hover::before {
+            opacity: 1;
+        }
+
+        .variant-5 .addon-item:hover {
+            background: rgba(255, 122, 0, 0.12);
+            transform: scale(1.01);
+        }
+
+        .variant-5 .addon-name {
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+
+        .variant-5 .addon-price {
+            color: #FF7A00;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* Общие стили для всех вариантов */
+        .addon-price.free {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .variant-1 .addons-grid,
+            .variant-2 .addons-grid,
+            .variant-5 .addons-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .variant-4 .addon-name,
+            .variant-4 .addon-price {
+                padding: 12px 15px;
+            }
+
+            .variant {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Варианты секции дополнений к напиткам</h1>
+
+        <!-- Вариант 1: Минималистичный с акцентом -->
+        <div class="variant variant-1">
+            <div class="variant-title">Вариант 1: Минималистичный с акцентом</div>
+            <div class="addons-title">КО ВСЕМ НАПИТКАМ МОЖНО ДОБАВИТЬ</div>
+            <div class="addons-grid">
+                <div class="addon-item">
+                    <span class="addon-name">Молоко</span>
+                    <span class="addon-price">50 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Альтернативное молоко</span>
+                    <span class="addon-price">90 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Сироп</span>
+                    <span class="addon-price">30 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Маршмеллоу</span>
+                    <span class="addon-price">40 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Мёд</span>
+                    <span class="addon-price">30 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Мята</span>
+                    <span class="addon-price">30 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Лимон</span>
+                    <span class="addon-price">20 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Корица</span>
+                    <span class="addon-price free">бесплатно</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вариант 2: Карточки с тенями -->
+        <div class="variant variant-2">
+            <div class="variant-title">Вариант 2: Карточки с тенями</div>
+            <div class="addons-title">КО ВСЕМ НАПИТКАМ МОЖНО ДОБАВИТЬ</div>
+            <div class="addons-grid">
+                <div class="addon-item">
+                    <div class="addon-name">Молоко</div>
+                    <div class="addon-price">50 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Альтернативное молоко</div>
+                    <div class="addon-price">90 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Сироп</div>
+                    <div class="addon-price">30 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Маршмеллоу</div>
+                    <div class="addon-price">40 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Мёд</div>
+                    <div class="addon-price">30 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Мята</div>
+                    <div class="addon-price">30 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Лимон</div>
+                    <div class="addon-price">20 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Корица</div>
+                    <div class="addon-price free">бесплатно</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вариант 3: Список с разделителями -->
+        <div class="variant variant-3">
+            <div class="variant-title">Вариант 3: Список с разделителями</div>
+            <div class="addons-title">КО ВСЕМ НАПИТКАМ МОЖНО ДОБАВИТЬ</div>
+            <div class="addons-list">
+                <div class="addon-item">
+                    <span class="addon-name">Молоко</span>
+                    <span class="addon-price">50 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Альтернативное молоко</span>
+                    <span class="addon-price">90 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Сироп</span>
+                    <span class="addon-price">30 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Маршмеллоу</span>
+                    <span class="addon-price">40 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Мёд</span>
+                    <span class="addon-price">30 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Мята</span>
+                    <span class="addon-price">30 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Лимон</span>
+                    <span class="addon-price">20 р.</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Корица</span>
+                    <span class="addon-price free">бесплатно</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вариант 4: Таблица с градиентами -->
+        <div class="variant variant-4">
+            <div class="variant-title">Вариант 4: Таблица с градиентами</div>
+            <div class="addons-title">КО ВСЕМ НАПИТКАМ МОЖНО ДОБАВИТЬ</div>
+            <table class="addons-table">
+                <tbody>
+                    <tr class="addon-item">
+                        <td class="addon-name">Молоко</td>
+                        <td class="addon-price">50 р.</td>
+                    </tr>
+                    <tr class="addon-item">
+                        <td class="addon-name">Альтернативное молоко</td>
+                        <td class="addon-price">90 р.</td>
+                    </tr>
+                    <tr class="addon-item">
+                        <td class="addon-name">Сироп</td>
+                        <td class="addon-price">30 р.</td>
+                    </tr>
+                    <tr class="addon-item">
+                        <td class="addon-name">Маршмеллоу</td>
+                        <td class="addon-price">40 р.</td>
+                    </tr>
+                    <tr class="addon-item">
+                        <td class="addon-name">Мёд</td>
+                        <td class="addon-price">30 р.</td>
+                    </tr>
+                    <tr class="addon-item">
+                        <td class="addon-name">Мята</td>
+                        <td class="addon-price">30 р.</td>
+                    </tr>
+                    <tr class="addon-item">
+                        <td class="addon-name">Лимон</td>
+                        <td class="addon-price">20 р.</td>
+                    </tr>
+                    <tr class="addon-item">
+                        <td class="addon-name">Корица</td>
+                        <td class="addon-price free">бесплатно</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Вариант 5: Модульная сетка -->
+        <div class="variant variant-5">
+            <div class="variant-title">Вариант 5: Модульная сетка</div>
+            <div class="addons-title">КО ВСЕМ НАПИТКАМ МОЖНО ДОБАВИТЬ</div>
+            <div class="addons-grid">
+                <div class="addon-item">
+                    <div class="addon-name">Молоко</div>
+                    <div class="addon-price">50 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Альтернативное молоко</div>
+                    <div class="addon-price">90 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Сироп</div>
+                    <div class="addon-price">30 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Маршмеллоу</div>
+                    <div class="addon-price">40 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Мёд</div>
+                    <div class="addon-price">30 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Мята</div>
+                    <div class="addon-price">30 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Лимон</div>
+                    <div class="addon-price">20 р.</div>
+                </div>
+                <div class="addon-item">
+                    <div class="addon-name">Корица</div>
+                    <div class="addon-price free">бесплатно</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

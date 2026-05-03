@@ -1,0 +1,168 @@
+/**
+ * Переключатель языка — токены компонента (на базе глобальной палитры).
+ */
+.language-switcher {
+  --lang-switch-focus-ring: var(--color-accent);
+  --lang-switch-menu-bg: var(--color-bg-elevated);
+  --lang-switch-menu-border: color-mix(in srgb, var(--color-text) 22%, transparent);
+  --lang-switch-menu-shadow: var(--shadow-elevated-strong);
+  --lang-switch-menu-z: var(--z-lang-menu);
+  --lang-switch-accent-muted: color-mix(in srgb, var(--color-accent) 22%, transparent);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.language-switcher-trigger {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.45rem;
+  margin: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  text-shadow:
+    0 0 0.3rem color-mix(in srgb, var(--color-gold-mid) 50%, transparent),
+    0 0 0.75rem color-mix(in srgb, var(--color-gold) 32%, transparent);
+  box-shadow: 0 0 0.85rem color-mix(in srgb, var(--color-gold-deep) 22%, transparent);
+  transition:
+    color var(--duration-fast) var(--ease-out-soft),
+    text-shadow var(--duration-fast) var(--ease-out-soft),
+    box-shadow var(--duration-fast) var(--ease-out-soft);
+}
+
+.language-switcher-trigger:hover {
+  color: var(--color-gold-bright);
+  text-shadow:
+    0 0 0.45rem color-mix(in srgb, var(--color-gold-highlight) 65%, transparent),
+    0 0 1rem color-mix(in srgb, var(--color-gold-mid) 42%, transparent),
+    0 0 1.65rem color-mix(in srgb, var(--color-gold) 28%, transparent);
+  box-shadow:
+    0 0 0.55rem color-mix(in srgb, var(--color-gold-mid) 40%, transparent),
+    0 0 1.35rem color-mix(in srgb, var(--color-gold) 26%, transparent),
+    0 0 2rem color-mix(in srgb, var(--color-gold-deep) 20%, transparent);
+}
+
+.language-switcher-trigger:focus {
+  outline: none;
+}
+
+.language-switcher-trigger:focus-visible {
+  outline: 2px solid var(--lang-switch-focus-ring);
+  outline-offset: 3px;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-accent) 35%, transparent),
+    0 0 0.85rem color-mix(in srgb, var(--color-gold-deep) 22%, transparent);
+}
+
+.language-switcher-menu {
+  position: fixed;
+  z-index: var(--lang-switch-menu-z);
+  min-width: 10.5rem;
+  max-width: min(18rem, calc(100vw - 1rem));
+  max-height: min(50vh, 16rem);
+  overflow: hidden auto;
+  padding: 0.35rem 0;
+  margin: 0;
+  list-style: none;
+  background: var(--lang-switch-menu-bg);
+  border: 1px solid var(--lang-switch-menu-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--lang-switch-menu-shadow);
+  overscroll-behavior: contain;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--duration-fast) var(--ease-out-soft),
+    visibility var(--duration-fast),
+    transform var(--duration-fast) var(--ease-out-soft);
+}
+
+.language-switcher-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.language-switcher-menu[data-placement='up'] {
+  transform: translateY(4px);
+}
+
+.language-switcher-menu[data-placement='up'].is-open {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .language-switcher-menu {
+    transition-duration: 0.01ms;
+  }
+
+  .language-switcher-menu.is-open {
+    transform: none;
+  }
+
+  .language-switcher-trigger {
+    transition-duration: 0.01ms;
+  }
+}
+
+.language-switcher-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+.language-switcher-option {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text);
+  text-align: start;
+  font: inherit;
+  font-size: var(--font-size-fluid-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out-soft);
+}
+
+.language-switcher-option:hover {
+  background: var(--lang-switch-accent-muted);
+}
+
+.language-switcher-option:focus {
+  outline: none;
+}
+
+.language-switcher-option:focus-visible {
+  outline: 2px solid var(--lang-switch-focus-ring);
+  outline-offset: -2px;
+  background: var(--lang-switch-accent-muted);
+}
+
+.language-switcher-option.is-active {
+  color: var(--color-accent);
+  font-weight: 700;
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+}

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо #5: Звездное небо с созвездиями</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Звездное небо */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #D4AF37, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(212, 175, 55, 0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #D4AF37, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(212, 175, 55, 0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #D4AF37, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+        }
+
+        /* Созвездия */
+        .constellation {
+            position: relative;
+            min-height: 80vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        /* Звезды-элементы */
+        .star-element {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .star-element:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Видео звезда */
+        .video-star {
+            aspect-ratio: 9/16;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .video-star video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Изображение звезда */
+        .image-star {
+            aspect-ratio: 4/5;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .image-star img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Соединительные линии */
+        .constellation-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 5;
+        }
+
+        .constellation-line:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 200px;
+            transform: rotate(15deg);
+        }
+
+        .constellation-line:nth-child(2) {
+            top: 40%;
+            right: 10%;
+            width: 150px;
+            transform: rotate(-25deg);
+        }
+
+        .constellation-line:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            width: 180px;
+            transform: rotate(45deg);
+        }
+
+        .constellation-line:nth-child(4) {
+            bottom: 20%;
+            right: 20%;
+            width: 160px;
+            transform: rotate(-35deg);
+        }
+
+        /* Активация линий при hover */
+        .star-element:hover ~ .constellation-line,
+        .star-element:hover + .constellation-line {
+            opacity: 1;
+            animation: line-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes line-glow {
+            0%, 100% { 
+                box-shadow: 0 0 5px #D4AF37;
+            }
+            50% { 
+                box-shadow: 0 0 20px #D4AF37, 0 0 30px rgba(212, 175, 55, 0.5);
+            }
+        }
+
+        /* Мерцающие звезды вокруг элементов */
+        .star-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .twinkle-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #D4AF37;
+            border-radius: 50%;
+            opacity: 0;
+            animation: star-twinkle 3s ease-in-out infinite;
+        }
+
+        .twinkle-star:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .twinkle-star:nth-child(2) { top: 25%; left: 80%; animation-delay: 0.5s; }
+        .twinkle-star:nth-child(3) { top: 60%; left: 20%; animation-delay: 1s; }
+        .twinkle-star:nth-child(4) { top: 75%; left: 85%; animation-delay: 1.5s; }
+        .twinkle-star:nth-child(5) { top: 40%; left: 50%; animation-delay: 2s; }
+
+        @keyframes star-twinkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Усиление мерцания при hover */
+        .star-element:hover .twinkle-star {
+            animation-duration: 1s;
+            background: #FFD700;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .constellation {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .constellation-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Атмосфера кафе</h1>
+        <p class="section-subtitle">Почувствуйте уникальную атмосферу "Нервной Лолы"</p>
+        
+        <div class="constellation">
+            <!-- Видео звезда -->
+            <div class="star-element video-star">
+                <div class="star-field">
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                </div>
+                <video 
+                    controls 
+                    muted
+                    preload="metadata"
+                    poster="assets/images/video-poster.jpg">
+                    <source src="../WhatsApp_Video_2024-12-13_at_03.34.20.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Изображение звезда -->
+            <div class="star-element image-star">
+                <div class="star-field">
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                    <div class="twinkle-star"></div>
+                </div>
+                <img 
+                    src="../9e32ed17-d72a-4124-8025-852e4cfd45cb.png" 
+                    alt="Уникальная атмосфера кафе Нервная Лола">
+            </div>
+            
+            <!-- Соединительные линии созвездия -->
+            <div class="constellation-line"></div>
+            <div class="constellation-line"></div>
+            <div class="constellation-line"></div>
+            <div class="constellation-line"></div>
+        </div>
+    </div>
+</body>
+</html>

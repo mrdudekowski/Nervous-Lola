@@ -1,0 +1,11 @@
+/**
+ * Шим для старых HTML/демо, которые подключают assets/css/main.css напрямую.
+ * Канон стилей лендинга — цепочка в assets/js/main.js (сборка webpack).
+ *
+ * Без дублирования «второго» body-цвета: при наличии tokens.css используются переменные.
+ */
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+}

@@ -1,0 +1,26 @@
+.intro__text {
+  max-width: 48ch;
+}
+
+.intro__text p {
+  margin: 0 0 1em;
+  color: var(--color-text-muted);
+}
+
+.intro__text p:last-child {
+  margin-bottom: 0;
+}
+
+.intro__figure {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: var(--border-subtle);
+  box-shadow: var(--shadow-elevated);
+}
+
+.intro__figure img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

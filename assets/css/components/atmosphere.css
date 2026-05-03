@@ -1,0 +1,93 @@
+.atmosphere {
+  padding-block: 0;
+}
+
+.atmosphere__heading-wrap {
+  padding-block: var(--space-section) var(--space-block);
+  width: min(72rem, 100% - 2 * var(--space-gutter));
+  margin-inline: auto;
+}
+
+.atmosphere__carousel {
+  position: relative;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  background: var(--color-bg-elevated);
+}
+
+.atmosphere__viewport {
+  position: relative;
+  min-height: min(65vh, 36rem);
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.atmosphere__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity var(--carousel-fade-duration) var(--carousel-fade-ease);
+  pointer-events: none;
+}
+
+.atmosphere__slide.is-active {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.atmosphere__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.atmosphere__caption {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  padding: var(--space-gutter);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-ink) 70%, transparent),
+    transparent
+  );
+  color: var(--color-snow);
+  font-size: var(--font-size-fluid-hero-caption);
+  line-height: var(--line-height-body);
+  z-index: 2;
+}
+
+.atmosphere__controls {
+  position: absolute;
+  inset-inline: var(--space-gutter);
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.atmosphere__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: var(--space-block);
+}
+
+.atmosphere__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--color-text) 35%, transparent);
+  cursor: pointer;
+}
+
+.atmosphere__dot[aria-current="true"] {
+  background: var(--color-accent);
+}

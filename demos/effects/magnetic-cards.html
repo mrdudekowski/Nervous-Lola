@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демо #1: Парящие карточки с магнитным эффектом</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+        }
+
+        /* Магнитная сетка */
+        .magnetic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            min-height: 80vh;
+            position: relative;
+        }
+
+        /* Парящие карточки */
+        .magnetic-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 40px rgba(212, 175, 55, 0.1),
+                0 0 0 1px rgba(212, 175, 55, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+            cursor: pointer;
+        }
+
+        .magnetic-card:nth-child(1) {
+            transform: translateY(-20px) rotate(-2deg);
+        }
+
+        .magnetic-card:nth-child(2) {
+            transform: translateY(20px) rotate(2deg);
+        }
+
+        /* Магнитный эффект */
+        .magnetic-card:hover {
+            transform: translateY(-10px) scale(1.02) rotate(0deg);
+            box-shadow: 
+                0 30px 60px rgba(212, 175, 55, 0.2),
+                0 0 0 1px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Видео карточка */
+        .video-card {
+            aspect-ratio: 9/16;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Изображение карточка */
+        .image-card {
+            aspect-ratio: 4/5;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .magnetic-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .magnetic-card:nth-child(1),
+            .magnetic-card:nth-child(2) {
+                transform: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Атмосфера кафе</h1>
+        <p class="section-subtitle">Почувствуйте уникальную атмосферу "Нервной Лолы"</p>
+        
+        <div class="magnetic-grid">
+            <!-- Видео карточка -->
+            <div class="magnetic-card video-card">
+                <video 
+                    controls 
+                    muted
+                    preload="metadata"
+                    poster="assets/images/video-poster.jpg">
+                    <source src="../WhatsApp_Video_2024-12-13_at_03.34.20.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- Изображение карточка -->
+            <div class="magnetic-card image-card">
+                <img 
+                    src="../9e32ed17-d72a-4124-8025-852e4cfd45cb.png" 
+                    alt="Уникальная атмосфера кафе Нервная Лола">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Магнитный эффект
+        document.querySelectorAll('.magnetic-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                const rotateX = (y / rect.height) * 10;
+                const rotateY = (x / rect.width) * -10;
+                
+                card.style.transform = `translateY(-10px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>

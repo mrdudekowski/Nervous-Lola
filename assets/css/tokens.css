@@ -1,0 +1,201 @@
+:root {
+  color-scheme: dark;
+
+  /* Базовые «крайние» цвета для color-mix и подписей на фото/видео */
+  --color-ink: #000;
+  --color-snow: #fff;
+
+  /* Поверхности */
+  --color-bg: #0f0f10;
+  --color-bg-elevated: #161618;
+
+  /* Подложки треков / старые hero-шаблоны: чуть темнее elevated */
+  --color-bg-deep: #111;
+  --color-text: #f5f5f5;
+  --color-text-muted: #c8c8c8;
+  --color-accent: #e32239;
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 35%, transparent);
+
+  /* Золото: стрелки героя, фокус, акценты свечения (единая палитра). */
+  --color-gold: #c9a227;
+  --color-gold-bright: #e4c04a;
+  --color-gold-mid: #d4af37;
+  --color-gold-highlight: #e8c547;
+  --color-gold-deep: #8a7020;
+
+  /* Меню (исключение по ТЗ) */
+  --color-menu-bg: #d1c1b8;
+  --color-menu-text: #111;
+  --color-menu-border: #e6e6e6;
+  --color-menu-backside: color-mix(in srgb, var(--color-ink) 6.3%, transparent);
+
+  /* Смешения для текста меню на светлом фоне секции */
+  --color-menu-text-dim-strong: #666;
+  --color-menu-text-dim: #555;
+
+  /* Контакты — hover из токенов */
+  --color-contact-tg-hover: #229ed9;
+  --color-contact-wa-hover: #25d366;
+  --color-contact-phone-hover: var(--color-accent);
+
+  /* Меню: затемнение только фона карточки категории (1 = без изменений) */
+  --menu-category-photo-brightness: 0.52;
+
+  /*
+   * Динамически из JS (menu-renderer.js, контракт компонента «меню»):
+   * --menu-category-bg-image — url() фото категории из menu.json (backgroundImage).
+   */
+
+  /* Меню: карточка категории (отступы, сетка, оверлей, z-слои) */
+  --menu-category-pad-block: clamp(1rem, 2.2vw, 1.25rem);
+  --menu-category-pad-inline: clamp(1rem, 2.5vw, 1.35rem);
+  --menu-category-gap-row: 0.65rem;
+  --menu-category-gap-col: 1rem;
+  --menu-category-icon-col: 2.5rem;
+  --menu-category-overlay-opacity: 0.5;
+  --menu-category-bg-placeholder: url('../images/menu/category-bg-placeholder.svg');
+  --z-menu-category-bg: 0;
+  --z-menu-category-overlay: 1;
+  --z-menu-category-content: 2;
+
+  /* Меню: layout «2 колонки, карточка только слева» (см. menu.json layout: two-col-left) */
+  --menu-category-2col-template: repeat(2, minmax(0, 1fr));
+  --menu-category-2col-gap: var(--menu-category-gap-col);
+  /* Логотип в правой колонке (asideLogoFile), только при two-col-left */
+  --menu-category-aside-logo-max-width: min(100%, 11rem);
+  --menu-category-aside-padding-inline: var(--menu-category-gap-col);
+  --menu-category-aside-padding-block-mobile: var(--menu-category-gap-row);
+
+  /* Меню: панель и заголовок секции */
+  --menu-panel-gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  --menu-panel-gap-two-col: clamp(1rem, 2vw, 1.35rem);
+  --menu-panel-two-col-min: 56rem;
+  --menu-section-heading-wrap-gap: var(--menu-category-gap-row);
+  --menu-section-heading-icon-size: clamp(1.75rem, 1.45rem + 0.9vw, 2.35rem);
+  --menu-section-top-columns: minmax(0, 1fr) minmax(0, 1fr);
+  --menu-section-top-gap: clamp(1rem, 0.65rem + 1.1vw, 1.75rem);
+  --menu-section-callout-padding: clamp(0.75rem, 0.55rem + 0.85vw, 1.125rem) clamp(1rem, 0.7rem + 1vw, 1.35rem);
+  --menu-section-callout-radius: var(--radius-md);
+  --menu-section-callout-bg: color-mix(in srgb, var(--color-menu-text) 7%, transparent);
+  --menu-section-callout-border: 1px solid color-mix(in srgb, var(--color-menu-text) 14%, transparent);
+  --menu-section-callout-font-weight: 600;
+  --menu-section-callout-line-height: 1.35;
+
+  /* Меню: текст на карточке поверх фото + оверлей */
+  --color-menu-card-text: var(--color-snow);
+  --color-menu-card-subtitle: color-mix(in srgb, var(--color-snow) 88%, transparent);
+  --color-menu-card-note: color-mix(in srgb, var(--color-snow) 82%, transparent);
+  --color-menu-card-desc: color-mix(in srgb, var(--color-snow) 85%, transparent);
+  --color-menu-card-item-note: color-mix(in srgb, var(--color-snow) 78%, transparent);
+  --color-menu-card-border: color-mix(in srgb, var(--color-snow) 28%, var(--color-menu-border));
+  --color-menu-card-item-rule: color-mix(in srgb, var(--color-snow) 48%, transparent);
+
+  /* Меню: фильтры иконок */
+  --filter-icon-mono-on-light: brightness(0);
+  --filter-menu-card-icon-on-media: brightness(0) invert(1);
+
+  /* Меню: дробные шаги от --menu-category-gap-row */
+  --menu-category-gap-tight: calc(var(--menu-category-gap-row) * 0.25);
+  --menu-category-gap-half: calc(var(--menu-category-gap-row) * 0.35);
+  --menu-category-gap-subtitle-top: calc(var(--menu-category-gap-row) * 0.54);
+  --menu-category-subsection-head-margin: calc(var(--menu-category-gap-row) * 0.5);
+  --menu-subsection-title-space-after: calc(var(--menu-category-gap-row) * 0.54);
+  --menu-item-main-gap: 0.2rem;
+  --menu-item-price-padding-top: 0.12em;
+
+  /* Типографика */
+  --font-sans: system-ui, "Segoe UI", roboto, ubuntu, cantarell, "Noto Sans", sans-serif;
+  --font-size-fluid-sm: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  --font-size-fluid-base: clamp(1rem, 0.95rem + 0.35vw, 1.125rem);
+  --font-size-fluid-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --font-size-fluid-xl: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+  --font-size-fluid-hero-caption: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
+  --font-size-fluid-menu-item-note: clamp(0.8rem, 0.78rem + 0.12vw, 0.9rem);
+  --line-height-tight: 1.25;
+  --line-height-body: 1.55;
+
+  /* Отступы */
+  --space-section: clamp(2.5rem, 6vw, 4.5rem);
+  --space-gutter: clamp(1rem, 3vw, 1.75rem);
+  --space-block: clamp(1rem, 2.5vw, 1.5rem);
+
+  /* Радиусы и обводки */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --border-subtle: 1px solid color-mix(in srgb, var(--color-text) 18%, transparent);
+
+  /* Тени и свечение (общие для карточек, навбара, переключателя языка) */
+  --shadow-elevated: 0 12px 40px color-mix(in srgb, var(--color-ink) 35%, transparent);
+  --shadow-elevated-strong: 0 12px 40px color-mix(in srgb, var(--color-ink) 55%, transparent);
+  --shadow-nav-fab-panel: drop-shadow(0 12px 24px color-mix(in srgb, var(--color-ink) 45%, transparent));
+  --shadow-nav-chip: 0 2px 10px color-mix(in srgb, var(--color-ink) 18%, transparent);
+
+  /* Анимации */
+  --duration-fast: 180ms;
+  --duration-normal: 320ms;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Карусели: смена слайдов (opacity) */
+  --carousel-fade-duration: 560ms;
+  --carousel-fade-ease: cubic-bezier(0.45, 0, 0.55, 1);
+  --hero-interval-ms: 4000;
+  --atmo-interval-ms: 5500;
+
+  /* Z-index */
+  --z-nav: 100;
+  --z-lang-menu: 140;
+  --z-hero-logo: 10;
+  --z-hero-controls: 20;
+
+  /* Карта: высота canvas (совпадает с .map-root min-height) */
+  --map-canvas-height: 22rem;
+
+  /* Герой: max-width ultra-wide + согласованный sizes в hero-carousel.js */
+  --hero-max-width: 88rem;
+  --hero-aspect-mobile: 4 / 5;
+
+  /* 16:9 — меньше «киношных» полей при object-fit: contain на портретных кадрах */
+  --hero-aspect-desktop: 16 / 9;
+  --hero-max-height: min(78vh, 48rem);
+  --hero-min-height-mobile: min(58vh, 26rem);
+
+  /* Герой: логотип по центру поверх слайдов (+20% к базовому размеру) */
+  --hero-logo-size-min: calc(6.5rem * 1.2);
+  --hero-logo-size-vw: calc(22vw * 1.2);
+  --hero-logo-size-max: calc(11rem * 1.2);
+  --hero-logo-max-width-percent: calc(42% * 1.2);
+  --hero-logo-max-width-cap: calc(11rem * 1.2);
+  --hero-logo-shadow-offset-y: 0.2rem;
+  --hero-logo-shadow-blur: 1.25rem;
+  --hero-logo-shadow-opacity: 0.45;
+
+  /* Навбар: вертикальный padding полосы шапки (одна точка для ряда и компенсации лого) */
+  --nav-shell-pad-block: 0.35rem;
+
+  /* Навбар: логотип по высоте строки шапки; max-width — горизонтальный предел */
+  --nav-brand-logo-max-width: calc(9rem * 1.1);
+  --nav-brand-logo-shadow-offset-y: 0.12rem;
+  --nav-brand-logo-shadow-blur: 0.75rem;
+  --nav-brand-logo-shadow-opacity: 0.38;
+
+  /* Навбар: высота контентной строки (без padding полосы); полоса = + 2 * --nav-shell-pad-block */
+  --nav-height: 3.5rem;
+  --nav-bg: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  --nav-blur: 12px;
+
+  /* Бургер-меню: до этого максимума — мобильная навигация */
+  --nav-mobile-max: 47.9375rem;
+
+  /*
+   * Якоря и программный скролл: совпадает с высотой липкой полосы шапки
+   * (FAB под шапкой absolute — в потоке не участвует). Lenis при scrollTo
+   * читает scroll-padding-top с documentElement (см. Lenis README / исходники).
+   */
+  --scroll-padding-top: calc(var(--nav-height) + 2 * var(--nav-shell-pad-block));
+
+  /* Круглые якоря: полупрозрачный чёрный */
+  --nav-fab-surface: color-mix(in srgb, var(--color-ink) 58%, transparent);
+  --nav-fab-surface-hover: color-mix(in srgb, var(--color-ink) 72%, transparent);
+  --nav-fab-border: color-mix(in srgb, var(--color-text) 22%, transparent);
+}

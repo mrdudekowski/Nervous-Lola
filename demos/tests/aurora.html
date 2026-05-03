@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Demo - Нервная Лола</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgb(139 69 19 / 15%) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgb(160 82 45 / 12%) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgb(205 133 63 / 8%) 0%, transparent 70%),
+                linear-gradient(135deg, 
+                    rgb(26 26 26) 0%, 
+                    rgb(35 35 35) 25%,
+                    rgb(45 35 25) 50%,
+                    rgb(35 25 20) 75%,
+                    rgb(26 26 26) 100%
+                );
+            background-attachment: fixed;
+        }
+        
+        /* Aurora container styles */
+        .aurora-container {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: transparent;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .aurora-container canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Fallback gradient for Aurora if WebGL not supported */
+        .aurora-container .aurora-fallback {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgb(139 69 19 / 12%) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgb(160 82 45 / 8%) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgb(205 133 63 / 6%) 0%, transparent 70%),
+                linear-gradient(135deg, 
+                    rgb(139 69 19 / 4%) 0%, 
+                    rgb(160 82 45 / 3%) 50%, 
+                    rgb(205 133 63 / 2%) 100%
+                );
+            filter: blur(25px);
+            opacity: 70%;
+            z-index: 1;
+            pointer-events: none;
+            animation: auroraFallbackPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes auroraFallbackPulse {
+            0%, 100% { 
+                opacity: 70%;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 85%;
+                transform: scale(1.02);
+            }
+        }
+        
+        .demo-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .demo-content {
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+        
+        .demo-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #D4AF37;
+        }
+        
+        .demo-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .demo-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .demo-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .demo-btn:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .demo-info {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            background: rgba(0,0,0,0.7);
+            padding: 1rem;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+    <!-- Aurora background container -->
+    <div class="aurora-container"></div>
+    
+    <!-- Demo content -->
+    <div class="demo-container">
+        <div class="demo-content">
+            <h1 class="demo-title">☕ Нервная Лола</h1>
+            <p class="demo-subtitle">Aurora Effect Demo</p>
+            <div class="demo-controls">
+                <button class="demo-btn" onclick="changeSpeed(0.05)">Медленно</button>
+                <button class="demo-btn" onclick="changeSpeed(0.12)">Нормально</button>
+                <button class="demo-btn" onclick="changeSpeed(0.25)">Быстро</button>
+                <button class="demo-btn" onclick="changeOpacity(0.1)">Слабо</button>
+                <button class="demo-btn" onclick="changeOpacity(0.22)">Средне</button>
+                <button class="demo-btn" onclick="changeOpacity(0.4)">Сильно</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-info">
+        <strong>🎨 Aurora Effect для кофейни "Нервная Лола"</strong><br>
+        • Бордовые оттенки: эспрессо, капучино, латте<br>
+        • Многослойные волны как пар от кофе<br>
+        • Мерцание как отражение в чашке<br>
+        • Органичные формы и текстуры<br>
+        • Адаптивность для мобильных устройств
+    </div>
+    
+    <!-- Aurora script -->
+    <script src="assets/js/modules/aurora.js"></script>
+    
+    <script>
+        // Demo controls
+        function changeSpeed(speed) {
+            if (window.coffeeAuroraInstance) {
+                window.coffeeAuroraInstance.updateOptions({ speed: speed });
+                console.log('☕ Скорость Aurora изменена на:', speed);
+            }
+        }
+        
+        function changeOpacity(opacity) {
+            if (window.coffeeAuroraInstance) {
+                window.coffeeAuroraInstance.updateOptions({ opacity: opacity });
+                console.log('☕ Прозрачность Aurora изменена на:', opacity);
+            }
+        }
+        
+        // Initialize Aurora with demo settings
+        document.addEventListener('DOMContentLoaded', function() {
+            const auroraContainer = document.querySelector('.aurora-container');
+            if (auroraContainer) {
+                window.coffeeAuroraInstance = new CoffeeAurora(auroraContainer, {
+                    colorStops: [
+                        'rgb(139 69 19)',   // Темно-бордовый (эспрессо)
+                        'rgb(160 82 45)',   // Средний бордовый (капучино)
+                        'rgb(205 133 63)'   // Светло-бордовый (латте)
+                    ],
+                    speed: 0.12,
+                    opacity: 0.22,
+                    blend: 0.4,
+                    amplitude: 0.5
+                });
+                console.log('☕ Aurora Demo инициализирован');
+            }
+        });
+    </script>
+</body>
+</html>
