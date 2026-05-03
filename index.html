@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Нервная Лола — кофейня во Владивостоке.">
+    <title>Нервная Лола — кофейня</title>
+    <!-- Порядок как в assets/js/main.js — нужен для просмотра index.html по file:// -->
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
+    <link rel="stylesheet" href="assets/css/components/navbar.css">
+    <link rel="stylesheet" href="assets/css/components/language-switcher.css">
+    <link rel="stylesheet" href="assets/css/components/carousel-controls.css">
+    <link rel="stylesheet" href="assets/css/components/hero.css">
+    <link rel="stylesheet" href="assets/css/components/intro.css">
+    <link rel="stylesheet" href="assets/css/components/atmosphere.css">
+    <link rel="stylesheet" href="assets/css/components/about.css">
+    <link rel="stylesheet" href="assets/css/components/menu.css">
+    <link rel="stylesheet" href="assets/css/components/map-section.css">
+    <link rel="stylesheet" href="assets/css/components/contacts.css">
+    <link rel="stylesheet" href="assets/css/components/site-footer.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">К основному содержимому</a>
+
+    <!-- Blur только на полосе с лого; меню — круглые кнопки под шапкой (см. .site-nav--fab). -->
+    <div class="site-header-shell">
+        <div class="site-header-shell__bound">
+        <div class="site-header-shell__row">
+            <header class="site-header">
+                <div class="site-header__inner">
+                    <h1 class="sr-only">Нервная Лола</h1>
+                    <a class="site-logo" href="#hero">
+                        <img class="site-logo__mark" src="assets/icons/lolalogo.svg" alt="" width="200" height="134" decoding="async">
+                        <span>Нервная Лола</span>
+                    </a>
+                    <div class="site-header__trailing">
+                        <div id="language-switcher-root" class="site-header__lang"></div>
+                        <!-- Иконка: Uiverse.io by JulanDeAlb (адаптировано под тему и a11y) -->
+                        <label class="hamburger site-nav-toggle" aria-controls="site-nav" aria-expanded="false">
+                            <span class="sr-only">Открыть или закрыть меню разделов</span>
+                            <input type="checkbox" class="site-nav-checkbox" id="site-nav-checkbox">
+                            <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                                <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+                                <path class="line" d="M7 16 27 16"></path>
+                            </svg>
+                        </label>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- Мобильное меню: круглые якоря под шапкой (без полноэкранного контейнера) -->
+        <nav id="site-nav" class="site-nav site-nav--fab" aria-label="Основные разделы">
+            <a href="#privet" class="site-nav__chip">
+                <span class="site-nav__chip-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                <span class="site-nav__chip-text">О нас</span>
+            </a>
+            <a href="#menu" class="site-nav__chip">
+                <span class="site-nav__chip-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+                </span>
+                <span class="site-nav__chip-text">Меню</span>
+            </a>
+            <a href="#karta" class="site-nav__chip">
+                <span class="site-nav__chip-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <span class="site-nav__chip-text">Карта</span>
+            </a>
+        </nav>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <section id="hero" class="hero">
+            <div class="hero__inner">
+                <div id="hero-mount" class="hero__shell"></div>
+                <div class="hero__logo-wrap" aria-hidden="true">
+                    <img class="hero__logo" src="assets/icons/lolalogo.svg" alt="" width="200" height="134" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <section id="privet" class="section about-section" aria-labelledby="privet-heading">
+            <div class="layout-shell about-section__shell">
+                <div class="about-section__grid">
+                    <div class="about-section__copy-col">
+                        <h2 id="privet-heading" class="section__heading"></h2>
+                        <div id="privet-body" class="intro__text"></div>
+                        <div id="about-video-mount" class="about-section__video"></div>
+                    </div>
+                    <div id="about-carousel-mount" class="about-carousel about-section__carousel-col"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu-section" aria-labelledby="menu-heading">
+            <div class="layout-shell">
+                <div class="menu-section__top">
+                    <div class="menu-section__heading-wrap">
+                        <img class="menu-section__heading-icon" src="assets/icons/menu.svg" width="36" height="36" alt="" decoding="async">
+                        <h2 id="menu-heading" class="section__heading menu-section__heading"></h2>
+                    </div>
+                    <div class="menu-section__aside-callout" hidden>
+                        <p id="menu-callout" class="menu-section__callout"></p>
+                    </div>
+                </div>
+                <div id="menu-mount"></div>
+            </div>
+        </section>
+
+        <section id="karta" class="section map-section" aria-labelledby="map-heading">
+            <div class="layout-shell">
+                <div class="map-section__grid">
+                    <div class="map-section__copy">
+                        <h2 id="map-heading" class="section__heading"></h2>
+                        <p id="map-note" class="map-note"></p>
+                        <p id="map-address" class="map-address"></p>
+                        <h2 id="contacts-heading" class="sr-only"></h2>
+                    </div>
+                    <div class="map-section__cta">
+                        <div id="contacts-mount" class="map-section__contacts" aria-labelledby="contacts-heading"></div>
+                    </div>
+                    <div id="yandex-map-root" class="map-root map-section__map" data-lenis-prevent></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="layout-shell">
+            <p id="footer-copy"></p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,5 +1,56 @@
+const fs = require('fs');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+function loadDotEnv() {
+  const envPath = path.join(__dirname, '.env');
+  try {
+    if (!fs.existsSync(envPath)) return;
+    const text = fs.readFileSync(envPath, 'utf8');
+    text.split(/\r?\n/).forEach((line) => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) return;
+      const eq = trimmed.indexOf('=');
+      if (eq === -1) return;
+      const key = trimmed.slice(0, eq).trim();
+      let val = trimmed.slice(eq + 1).trim();
+      if (
+        (val.startsWith('"') && val.endsWith('"')) ||
+        (val.startsWith("'") && val.endsWith("'"))
+      ) {
+        val = val.slice(1, -1);
+      }
+      if (key && process.env[key] === undefined) {
+        process.env[key] = val;
+      }
+    });
+  } catch {
+    /* игнорируем отсутствие или ошибку чтения .env */
+  }
+}
+
+loadDotEnv();
+
+/**
+ * Канонический и og:url задаются только при сборке с HTTPS-источником, например:
+ *   cross-env SITE_URL=https://example.com npm run build
+ * (без завершающего слэша в SITE_URL).
+ */
+function sanitizeSiteUrl(raw) {
+  if (!raw || typeof raw !== 'string') {
+    return '';
+  }
+  const trimmed = raw.trim().replace(/\/+$/, '');
+  if (!/^https:\/\//i.test(trimmed)) {
+    return '';
+  }
+  try {
+    const u = new URL(trimmed);
+    return u.protocol === 'https:' ? trimmed : '';
+  } catch {
+    return '';
+  }
+}
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -74,6 +125,45 @@ module.exports = (env, argv) => {
           minifyURLs: true
         } : false
       }),
+      {
+        apply(compiler) {
+          compiler.hooks.compilation.tap('LolaSiteUrlInject', (compilation) => {
+            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tapAsync(
+              'LolaSiteUrlInject',
+              (data, cb) => {
+                /* Для file:// — hero-carousel-inline.js; в dist остаётся только бандл Webpack (см. entry main.js). */
+                data.html = data.html.replace(
+                  /<script\b[^>]*\bsrc=["'](?:\.\/)?assets\/js\/hero-carousel-inline\.js["'][^>]*>\s*<\/script>/gi,
+                  ''
+                );
+
+                const yandexKey = process.env.YANDEX_MAP_API_KEY || '';
+                const runtimeCfg = `<script>window.__NL_ENV=window.__NL_ENV||{};window.__NL_ENV.YANDEX_MAP_API_KEY=${JSON.stringify(yandexKey)};</script>`;
+                data.html = data.html.replace(/<head>/i, `<head>${runtimeCfg}`);
+                data.html = data.html.replace(/<!--\s*__NL_RUNTIME_ENV_INJECT__\s*-->/g, '');
+
+                const siteUrl = sanitizeSiteUrl(process.env.SITE_URL);
+                if (siteUrl) {
+                  const ld = JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'WebSite',
+                    name: 'Нервная Лола',
+                    url: `${siteUrl}/`,
+                    description: 'Нервная Лола — уникальная кофейня с характером.'
+                  });
+                  const block = `\n    <link rel="canonical" href="${siteUrl}/">\n    <meta property="og:url" content="${siteUrl}/">\n    <script type="application/ld+json">${ld}</script>`;
+                  const titleEnd = data.html.indexOf('</title>');
+                  if (titleEnd !== -1) {
+                    const pos = titleEnd + '</title>'.length;
+                    data.html = data.html.slice(0, pos) + block + data.html.slice(pos);
+                  }
+                }
+                cb(null, data);
+              }
+            );
+          });
+        }
+      },
       ...(isProduction ? [
         new MiniCssExtractPlugin({
           filename: '[name].[contenthash].css'
@@ -142,7 +232,8 @@ module.exports = (env, argv) => {
       port: 8080,
       hot: true,
       open: true,
-      historyApiFallback: true
+      /* Статический лендинг без клиентских маршрутов — false снижает риск отдачи index.html вместо CSS/ассетов. */
+      historyApiFallback: false
     },
     performance: {
       hints: isProduction ? 'warning' : false,

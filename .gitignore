@@ -45,4 +45,17 @@ coverage/
 # Cache
 .cache/
 .parcel-cache/
+.eslintcache
+
+# Merge / editor backups
+*.orig
+
+# Keys and certificates (never commit)
+*.pem
+*.p12
+*.pfx
+*.cer
+*.der
+id_rsa
+id_rsa.pub
 
