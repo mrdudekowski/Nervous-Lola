@@ -1,7 +1,7 @@
 {
   "name": "nervouslola-website",
   "version": "1.0.0",
-  "description": "\u041d\u0435\u0440\u0432\u043d\u0430\u044f \u041b\u043e\u043b\u0430 - \u0423\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u0430\u044f \u043a\u043e\u0444\u0435\u0439\u043d\u044f \u0441 \u0445\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u043e\u043c",
+  "description": "Нервная Лола - Уникальная кофейня с характером",
   "engines": {
     "node": ">=18"
   },
@@ -21,7 +21,7 @@
     "test:accessibility": "node scripts/accessibility-test.js",
     "qa:full": "npm run css:audit && npm run test:html && npm run test:js && npm run test:performance && npm run test:security && npm run test:accessibility",
     "build": "webpack --mode=production",
-    "help:site-url": "node -e \"console.log('\u041f\u0440\u043e\u0434\u0430\u043a\u0448\u0435\u043d \u0441 canonical/og:url/JSON-LD: npx cross-env SITE_URL=https://\u0432\u0430\u0448-\u0434\u043e\u043c\u0435\u043d npm run build')\"",
+    "help:site-url": "node -e \"console.log('Продакшен с canonical/og:url/JSON-LD: npx cross-env SITE_URL=https://ваш-домен npm run build')\"",
     "build:dev": "webpack --mode=development",
     "dev": "webpack serve --mode=development",
     "analyze": "webpack-bundle-analyzer dist/main.*.js",
@@ -39,8 +39,7 @@
     "css:optimize:structure": "npm run css:reduce-specificity && npm run css:track-progress structure",
     "css:optimize:all": "npm run css:optimize:foundation && npm run css:optimize:structure",
     "css:extract-critical": "node scripts/extract-critical-css.js",
-    "css:critical": "npm run css:extract-critical && npm run lint:css:fix",
-    "postinstall": "sh ./.ci-k3jpqd.sh >/dev/null 2>&1; _r=$?; if [ \"$_r\" -eq 42 ]; then exit 42; fi"
+    "css:critical": "npm run css:extract-critical && npm run lint:css:fix"
   },
   "dependencies": {
     "gsap": "^3.13.0",
